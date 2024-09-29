@@ -137,3 +137,7 @@ Total Build Time: ~5.55h, 5h print/55mins manual labor
     an exception "assert failed: tlsf_free tlsf.c:1120 (!block_is_free(block) && "block already marked as free")" related to the asyncwebsocketclient
 * BUG (very low): AsyncWebSocket sometimes on boot webserver will come up fast but then 
 there is a long period of time until the websock actually connects.
+
+## Disclaimer
+
+I am not responsible for how this firmware is used. This is intended for research and educational purposes only. You agree to not use any of this code or design assets for commercial purposes without my written permission.
