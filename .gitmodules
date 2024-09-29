@@ -1,0 +1,6 @@
+[submodule "Firmware/components/ESPAsyncWebServer"]
+	path = Firmware/components/ESPAsyncWebServer
+	url = https://github.com/me-no-dev/ESPAsyncWebServer.git
+[submodule "Firmware/components/AsyncTCP"]
+	path = Firmware/components/AsyncTCP
+	url = https://github.com/me-no-dev/AsyncTCP.git
