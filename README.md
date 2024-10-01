@@ -130,8 +130,6 @@ Total Build Time: ~5.55h, 5h print/55mins manual labor
 ```
 
 ## Bugs / TODO
-* TODO (med): Captive Portal to Web UI. Some phones do not give the option to stay connected to wifi networks with no internet connection that dont send to a captive portal.
-* TODO (med): Touch Lock
 * TODO (low): gatt attack 
   - Sometimes when using the tool and the web ui
     an exception "assert failed: tlsf_free tlsf.c:1120 (!block_is_free(block) && "block already marked as free")" related to the asyncwebsocketclient

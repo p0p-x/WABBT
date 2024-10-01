@@ -51,6 +51,8 @@ void TouchController::touch_read_task(void *pvParameter) {
   int64_t touch_start_time_right = 0, touch_start_time_left = 0, touch_start_time_middle = 0;
   bool is_touching_right = false, is_touching_left = false, is_touching_middle = false;
 
+  params->controller->lock = false;
+
   while (true) {
     params->controller->right = params->controller->handle_touch(params, 
       params->controller->touch_right, touch_value, is_touching_right, touch_start_time_right);
@@ -71,6 +73,15 @@ void TouchController::touch_read_task(void *pvParameter) {
     // left + right
     if (is_touching_left && is_touching_right && !is_touching_middle) {
       leds->set_color(255, 0, 255);
+
+      int64_t touch_duration = esp_timer_get_time() - touch_start_time_left;
+      if (touch_duration >= LONG_TOUCH * 2.5) {
+        params->controller->lock = !params->controller->lock;
+        leds->blink(138, 0, 138, 5);
+        ESP_LOGI(TAG, "Touch Pads: %s",
+                params->controller->lock ? "LOCKED" : "UNLOCKED"
+                );
+      }
     }
 
     // left + middle

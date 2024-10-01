@@ -1,4 +1,5 @@
 #include <LittleFS.h>
+#include <DNSServer.h>
 #include <ArduinoJson.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -25,6 +26,7 @@
 
 #define TAG "webserver"
 
+DNSServer dnsServer;
 AsyncWebSocket WebServerModule::ws("/ws");
 
 AllClientsDisconnectedCallback g_disconnected_callback = NULL;
@@ -452,17 +454,6 @@ void WebServerModule::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *clie
   }
 };
 
-void WebServerModule::handlePostData(AsyncWebServerRequest *request) {
-  String message;
-  if (request->hasArg("data")) {
-    message = request->arg("data");
-    ESP_LOGI(TAG, "Received data: %s", message.c_str());
-  } else {
-    message = "No data received";
-  }
-  request->send(200, "text/plain", "POST data: " + message);
-};
-
 void WebServerModule::startAP() {
   WiFi.mode(WIFI_AP_STA);
   WiFi.softAPConfig(local_IP, gateway, subnet);
@@ -490,6 +481,10 @@ void WebServerModule::setup() {
   ESP_LOGI(TAG, "sta: %s", WiFi.macAddress().c_str());
   ESP_LOGI(TAG, "ap: %s", WiFi.softAPmacAddress().c_str());
 
+  if (dnsServer.start()) {
+    ESP_LOGI(TAG, "DNSServer Started");
+  }
+
   esp_wifi_get_channel(&PMKIDApp::channel, NULL);
 
   if (ap_mac_address[0] & 0x01) {
@@ -503,16 +498,6 @@ void WebServerModule::setup() {
   ws.onEvent(WebServerModule::onEvent);
   server.addHandler(&ws);
 
-  server.on("/post-data", HTTP_POST, [this](AsyncWebServerRequest *request) {
-    this->handlePostData(request);
-  });
-
-  server.on("^/(.*/)?[^./]+$", HTTP_GET, [this](AsyncWebServerRequest *request) {
-    AsyncWebServerResponse *response = request->beginResponse(LittleFS, "/index.html.gz", WebServerModule::getContentType("/index.html"));
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
-  });
-
   server.onNotFound([this](AsyncWebServerRequest *request) {
     String path = request->url();
     if (path.endsWith("/")) path += "index.html";
@@ -525,7 +510,9 @@ void WebServerModule::setup() {
     } else if (LittleFS.exists(path)) {
       request->send(LittleFS, path, this->getContentType(path));
     } else {
-      request->send(404, "text/plain", "Not Found");
+      AsyncWebServerResponse *response = request->beginResponse(302, "text/plain", "redirect");
+      response->addHeader("Location", "/");
+      request->send(response);
     }
   });
 
