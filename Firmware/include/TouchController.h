@@ -21,6 +21,7 @@ struct MyTouchReadParams {
 
 class TouchController {
 public:
+  bool lock;
   uint32_t right;
   uint32_t left;
   uint32_t middle;

@@ -6,7 +6,7 @@
 
 #define TAG "settings"
 
-const char* version = "v0.2.2";
+const char* version = "v0.3.3";
 
 // Define the MAC address in hexadecimal
 uint8_t bt_mac_address[] = {0x13, 0x37, 0x22, 0x33, 0x44, 0x55};

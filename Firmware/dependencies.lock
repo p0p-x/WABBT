@@ -1,11 +1,11 @@
 dependencies:
   bblanchon/arduinojson:
-    component_hash: 3e5969b506c191db1bff738f73a2ca0ff68fce1038eb097fd8db9bf99f1a8e43
+    component_hash: 64f91bdf5d064a60318fac01b2057a34fd17871fdd60a428ca6e26137dbc5645
     dependencies: []
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 7.1.0
+    version: 7.2.0
   chmorgan/esp-libhelix-mp3:
     component_hash: cbb76089dc2c5749f7b470e2e70aedc44c9da519e04eb9a67d4c7ec275229e53
     dependencies:
@@ -105,7 +105,7 @@ dependencies:
       type: service
     version: 0.6.0~1
   espressif/esp-dsp:
-    component_hash: fa7fe74305df6da25867437ebcd4213e047cbfc0556cf92067ab657fce537c6e
+    component_hash: 3e7bbd487f1357a1d4944d0c85966d049501ea281b8a4c7f93f7cfedd5b7f23d
     dependencies:
     - name: idf
       require: private
@@ -113,23 +113,30 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.5.2
+    version: 1.4.12
+  espressif/esp-serial-flasher:
+    component_hash: dcc42a16712a1a636509cf0bf90e14032d7f2141784b533613b267b6aa318d52
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.0.11
   espressif/esp-sr:
-    component_hash: 0580454068909c2854eb4572a6df137c916c5d81ad2198da938958578de9a90e
+    component_hash: 4aff7847709bd996ea8c381b794fe44a9db9fb5050684dc5715de07331eb70bc
     dependencies:
     - name: espressif/esp-dsp
       registry_url: https://components.espressif.com/
       require: private
-      version: ^1.2.1
+      version: <=1.5.0
     - name: idf
       require: private
       version: '>=4.4'
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.9.0
+    version: 1.9.2
   espressif/esp-zboss-lib:
-    component_hash: b0525e1008b69b5725348a0c62d89a32a51d9b6f7799134b52dc6018e1b48b40
+    component_hash: ceb89aaab088a3bc037c608bb7b7925e7116b0a7dda7c3476f44d9b06ff66c0a
     dependencies:
     - name: idf
       require: private
@@ -137,9 +144,9 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.4.1
+    version: 1.5.0
   espressif/esp-zigbee-lib:
-    component_hash: c585c6912fb0486593e04348ce7843a7e3e75f59752ea39eb63d5494a3c8519a
+    component_hash: 238c29955025d3e4f430fd7243ad7f9f038b97775746032478f34532ad5979aa
     dependencies:
     - name: idf
       require: private
@@ -147,7 +154,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.4.1
+    version: 1.5.0
   espressif/esp_diag_data_store:
     component_hash: 8849195251dbb8a2d7268335277cfa310cef36e4ac1e90cd59ad3be4269a30d7
     dependencies:
@@ -201,8 +208,14 @@ dependencies:
       type: service
     version: 1.2.0
   espressif/esp_rainmaker:
-    component_hash: 35828882bfdb5f9fbf16f910e41e55bb90855a65c0d6423e3e4e8fdd1b244758
+    component_hash: f89a4759347f3909417fb33059452f36c86befae9d10bda78b5417b7a5d19d11
     dependencies:
+    - name: espressif/esp_rcp_update
+      registry_url: https://components.espressif.com/
+      require: private
+      rules:
+      - if: idf_version >= 5.1
+      version: ~1.2.0
     - name: espressif/esp_schedule
       registry_url: https://components.espressif.com/
       require: private
@@ -240,7 +253,21 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.4.0
+    version: 1.5.0
+  espressif/esp_rcp_update:
+    component_hash: c10afbd54a17f27eed880e61262b161656e6d36ad63376c307f9273e99d0abcd
+    dependencies:
+    - name: espressif/esp-serial-flasher
+      registry_url: https://components.espressif.com/
+      require: private
+      version: ~0.0.0
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.2.0
   espressif/esp_schedule:
     component_hash: e202a9c688f7f1ab601efb91d682e4bcfaebc508dcceee1a1e0a0d2d1ca75a26
     dependencies:
@@ -293,7 +320,7 @@ dependencies:
       type: service
     version: 1.0.3
   espressif/led_strip:
-    component_hash: fc66f8544851132555bc668475f7b68acd6a211c8075db5ce1951cbfa27dfb88
+    component_hash: 28c6509a727ef74925b372ed404772aeedf11cce10b78c3f69b3c66799095e2d
     dependencies:
     - name: idf
       require: private
@@ -301,9 +328,9 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 2.5.4
+    version: 2.5.5
   espressif/mdns:
-    component_hash: 31117d76cae83a6d83ffd7f035f6fdae5bd05b914fc30b641afeb208b84de19a
+    component_hash: af6306fe65d637a3683d1cf671508fcedd6b05f9ca029a8815abeab64001fb8d
     dependencies:
     - name: idf
       require: private
@@ -311,9 +338,9 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.3.2
+    version: 1.4.0
   espressif/network_provisioning:
-    component_hash: ea38ded8a9d88ba2042f397f56336bbff18dadfbec9218b907b03ace8f0644f4
+    component_hash: ef2e10182fd1861e68b821491916327c25416ca7ae70e5a6e43313dbc71fe993
     dependencies:
     - name: idf
       require: private
@@ -321,7 +348,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.0.0
+    version: 1.0.2
   espressif/qrcode:
     component_hash: 3b493771bc5d6ad30cbf87c25bf784aada8a08c941504355b55d6b75518ed7bc
     dependencies: []

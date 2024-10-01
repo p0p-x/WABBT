@@ -36,6 +36,11 @@ void DisplayManager::setup() {
   // Setup the touch controller with a lambda function as the callback
   touch->setup([](int touchPadNum, const char* eventType, uint32_t touchValue) {
     leds->set_color(0, 0, 0); // clear led colors upon release
+    
+    if (touch->lock) {
+      return;
+    }
+
     idleTime = esp_timer_get_time(); // resume led animations when not used for a while
 
     if (currentMenu == BLE_MENU) {
