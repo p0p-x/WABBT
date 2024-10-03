@@ -61,7 +61,7 @@ pass: WABBT1234
 
 If this does not work check the WiFi info in settings for the correct credentials.
 
-Once you are connected you can click this [friendly link](http://10.3.3.7) to access the Web UI.
+Once you are connected you can click this [friendly link](http://1.3.3.7) to access the Web UI.
 
 ### Web UI Setup
 
@@ -69,7 +69,7 @@ Go to the settings Icon on the left hand side of the webpage and set the Badge's
 
 ![ui settings](./docs/img/wabbt_ui_settings.png)
 
-Connect to the new network you just setup and head back [to the UI](http://10.3.3.7) to fully utilize your badge.
+Connect to the new network you just setup and head back [to the UI](http://1.3.3.7) to fully utilize your badge.
 
 ### NFC
 

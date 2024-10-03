@@ -502,17 +502,23 @@ void WebServerModule::setup() {
     String path = request->url();
     if (path.endsWith("/")) path += "index.html";
 
+    if (path.endsWith("204")) {
+      AsyncWebServerResponse *res = request->beginResponse(302);
+      res->addHeader("Location", "http://1.3.3.7");
+      return request->send(res);
+    }
+
     String gzipPath = path + ".gz";
     if (LittleFS.exists(gzipPath)) {
-      AsyncWebServerResponse *response = request->beginResponse(LittleFS, gzipPath, this->getContentType(path));
-      response->addHeader("Content-Encoding", "gzip");
-      request->send(response);
+      AsyncWebServerResponse *res = request->beginResponse(LittleFS, gzipPath, this->getContentType(path));
+      res->addHeader("Content-Encoding", "gzip");
+      request->send(res);
     } else if (LittleFS.exists(path)) {
       request->send(LittleFS, path, this->getContentType(path));
     } else {
-      AsyncWebServerResponse *response = request->beginResponse(302, "text/plain", "redirect");
-      response->addHeader("Location", "/");
-      request->send(response);
+      AsyncWebServerResponse *res = request->beginResponse(302);
+      res->addHeader("Location", "http://1.3.3.7");
+      request->send(res);
     }
   });
 

@@ -116,7 +116,7 @@ export const Layout = () => {
 
   const setupSocket = () => {
     if (!window.socket || window.socket.readyState === 3) {
-      const socket = new WebSocket(`ws://10.3.3.7/ws`);
+      const socket = new WebSocket(`ws://1.3.3.7/ws`);
 
       socket.onopen = () => {
         console.log('WebSocket connection established');

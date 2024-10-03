@@ -18,8 +18,8 @@ const uint8_t default_ap_mac_address[] = {0x00, 0x00, 0x12, 0x34, 0x56, 0x78};
 const uint8_t default_st_mac_address[] = {0x13, 0x33, 0x77, 0x13, 0x37, 0x67};
 
 // AP IP/DHCP settings
-IPAddress local_IP(10, 3, 3, 7);
-IPAddress gateway(10, 3, 3, 1);
+IPAddress local_IP(1, 3, 3, 7);
+IPAddress gateway(1, 3, 3, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 char badge_name[16];
